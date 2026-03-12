@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hope Counseling Center Couples & Family Fee Calculator</title>
+  <style>
+    :root {
+      --hope-green: #2f6b57;
+      --hope-green-dark: #245444;
+      --hope-green-light: #eaf4ef;
+      --text-dark: #1f2937;
+      --text-muted: #6b7280;
+      --border: #d1d5db;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f7faf8 0%, #edf4f0 100%);
+      color: var(--text-dark);
+      padding: 24px;
+    }
+
+    .calculator-wrap {
+      max-width: 620px;
+      margin: 40px auto;
+    }
+
+    .calculator-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px;
+      border: 1px solid rgba(47, 107, 87, 0.08);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--hope-green);
+      background: var(--hope-green-light);
+      padding: 8px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 30px;
+      line-height: 1.15;
+      margin: 0 0 10px;
+      color: var(--hope-green-dark);
+    }
+
+    .subtext {
+      margin: 0 0 28px;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    select,
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text-dark);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+    }
+
+    select:focus,
+    input[type="text"]:focus {
+      border-color: var(--hope-green);
+      box-shadow: 0 0 0 4px rgba(47, 107, 87, 0.12);
+    }
+
+    .helper-text {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .calculate-btn {
+      width: 100%;
+      border: none;
+      border-radius: 14px;
+      background: var(--hope-green);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 15px 18px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.05s ease;
+    }
+
+    .calculate-btn:hover {
+      background: var(--hope-green-dark);
+    }
+
+    .calculate-btn:active {
+      transform: translateY(1px);
+    }
+
+    #result {
+      margin-top: 22px;
+      min-height: 64px;
+    }
+
+    .result-box {
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: var(--hope-green-light);
+      border: 1px solid rgba(47, 107, 87, 0.15);
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .result-box strong {
+      color: var(--hope-green-dark);
+      font-size: 24px;
+    }
+
+    .error-box {
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      color: #9f1239;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px;
+      }
+
+      .calculator-card {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .result-box strong {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator-wrap">
+    <div class="calculator-card">
+      <div class="eyebrow">Hope Counseling Center</div>
+      <h1>Couples & Family Self-Pay Fee Calculator</h1>
+      <p class="subtext">
+        Use the information below to see your estimated self-pay fee per session for couples and family counseling.
+      </p>
+
+      <div class="form-group">
+        <label for="familySize">Family Size</label>
+        <select id="familySize">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8 or more</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="income">Annual Household Income</label>
+        <input
+          type="text"
+          id="income"
+          autocomplete="off"
+          inputmode="numeric"
+          placeholder="Example: 45000"
+        />
+        <div class="helper-text">Enter numerals only, with no commas or symbols.</div>
+      </div>
+
+      <button id="calculateFee" class="calculate-btn">Do I Qualify?</button>
+
+      <div id="result"></div>
+
+      <div class="footer-note">
+        This calculator provides an estimate based on current Hope Counseling Center self-pay fee guidelines.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const familySize = document.getElementById("familySize");
+    const income = document.getElementById("income");
+    const calculateFeeButton = document.getElementById("calculateFee");
+    const result = document.getElementById("result");
+
+    const feeSchedule = {
+      "Fee A": 45,
+      "Fee B": 75,
+      "Fee C": 115,
+      "Fee D": 150
+    };
+
+    const incomeLimits = [
+      [20120, 29159, 43739],
+      [27214, 39439, 59160],
+      [34307, 49719, 74579],
+      [41400, 60000, 89999],
+      [48493, 70379, 105419],
+      [55586, 80759, 120839],
+      [62680, 90840, 136259],
+      [69773, 101519, 151679]
+    ];
+
+    income.addEventListener("focus", function () {
+      income.select();
+    });
+
+    income.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        calculateFeeButton.click();
+      }
+    });
+
+    calculateFeeButton.addEventListener("click", function () {
+      const selectedFamilySize = parseInt(familySize.value, 10) - 1;
+      let enteredIncome = income.value.trim();
+
+      if (!/^\d+$/.test(enteredIncome)) {
+        result.innerHTML = `
+          <div class="error-box">
+            Please enter a valid positive income using numbers only, with no commas or symbols.
+          </div>
+        `;
+        return;
+      }
+
+      enteredIncome = parseInt(enteredIncome, 10);
+
+      if (enteredIncome <= 0) {
+        result.innerHTML = `
+          <div class="error-box">
+            Income must be greater than 0.
+          </div>
+        `;
+        return;
+      }
+
+      const limits = incomeLimits[selectedFamilySize];
+
+      if (!limits) {
+        result.innerHTML = `
+          <div class="error-box">
+            Please select a valid family size.
+          </div>
+        `;
+        return;
+      }
+
+      let fee;
+
+      if (enteredIncome <= limits[0]) {
+        fee = feeSchedule["Fee A"];
+      } else if (enteredIncome <= limits[1]) {
+        fee = feeSchedule["Fee B"];
+      } else if (enteredIncome <= limits[2]) {
+        fee = feeSchedule["Fee C"];
+      } else {
+        fee = feeSchedule["Fee D"];
+      }
+
+      result.innerHTML = `
+        <div class="result-box">
+          You qualify for <strong>$${fee}</strong> per couples/family session.
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>
